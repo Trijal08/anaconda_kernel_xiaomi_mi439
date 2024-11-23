@@ -526,7 +526,13 @@ bypass_orig_flow:
 		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
         if (dentry) {
         	const char *path = (const char *)dentry->d_name.name;
-            	if (strstr(path, "lineage")) { return; }
+            	if (strstr(path, "lineage")) { 
+	  	start = vma->vm_start;
+		end = vma->vm_end;
+		show_vma_header_prefix(m, start, end, flags, pgoff, dev, ino);
+            	name = "/dev/ashmem (deleted)";
+		goto done;
+            	 	}
             	}
 	}
 
